@@ -27,7 +27,9 @@ public class UpdateStatus100 implements Runnable {
         while(LogWindow.finish){
             for(int i = 1; i<=GenerateTransaction.state100.listSize(); i++){
                 try {
-                    modelStatus100.addElement(GenerateTransaction.state100.getStateAt(i).getTransaction().getCorrelative());
+                    modelStatus100.addElement("|"+GenerateTransaction.state100.getStateAt(i).getTransaction().getCorrelative() +":"
+                            +GenerateTransaction.state100.getStateAt(i).getTransaction().getAmount()
+                    +"|");
                 } catch (Exception ex) {
                     Logger.getLogger(UpdateStatus100.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -37,7 +39,9 @@ public class UpdateStatus100 implements Runnable {
         if(!LogWindow.finish){
             for(int i = 1; i<=GenerateTransaction.state100.listSize(); i++){
                 try {
-                    modelStatus100.addElement(GenerateTransaction.state100.getStateAt(i).getTransaction().getCorrelative());
+                    modelStatus100.addElement("|"+GenerateTransaction.state100.getStateAt(i).getTransaction().getCorrelative() +":"
+                            +GenerateTransaction.state100.getStateAt(i).getTransaction().getAmount()
+                    +"|");
                 } catch (Exception ex) {
                     Logger.getLogger(UpdateStatus100.class.getName()).log(Level.SEVERE, null, ex);
                 }     

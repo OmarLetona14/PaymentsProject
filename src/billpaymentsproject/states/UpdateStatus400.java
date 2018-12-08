@@ -27,7 +27,9 @@ public class UpdateStatus400 implements Runnable {
         while(LogWindow.finish){
             for(int i = 1; i<=Payer.state400.listSize(); i++){
                 try {
-                    modelStatus400.addElement(Payer.state400.getStateAt(i).getTransaction().getCorrelative());
+                    modelStatus400.addElement("|"+Payer.state400.getStateAt(i).getTransaction().getCorrelative()+":"
+                            +Payer.state400.getStateAt(i).getTransaction().getAmount()
+                    +"|");
                 } catch (Exception ex) {
                     Logger.getLogger(UpdateStatus400.class.getName()).log(Level.SEVERE, null, ex);
                 }   
@@ -37,7 +39,9 @@ public class UpdateStatus400 implements Runnable {
         if(!LogWindow.finish){
             for(int i = 1; i<=Payer.state400.listSize(); i++){
                 try {
-                    modelStatus400.addElement(Payer.state400.getStateAt(i).getTransaction().getCorrelative());
+                    modelStatus400.addElement("|"+Payer.state400.getStateAt(i).getTransaction().getCorrelative()+":"
+                            +Payer.state400.getStateAt(i).getTransaction().getAmount()
+                    +"|");
                 } catch (Exception ex) {
                     Logger.getLogger(UpdateStatus400.class.getName()).log(Level.SEVERE, null, ex);
                 }   

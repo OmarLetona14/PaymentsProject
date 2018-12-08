@@ -11,38 +11,37 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
+public class UpdateStatus301 implements Runnable {
 
-public class UpdateStatus300 implements Runnable{
-    
-    JList listStatus300;
-    DefaultListModel modelStatus300 = new DefaultListModel();
+    JList listStatus301;
+    DefaultListModel modelStatus301 = new DefaultListModel();
         
     
-    public UpdateStatus300(JList listStatus300){
-        this.listStatus300 = listStatus300;
-        this.listStatus300.setModel(modelStatus300);
+    public UpdateStatus301(JList listStatus301){
+        this.listStatus301 = listStatus301;
+        this.listStatus301.setModel(modelStatus301);
     }
         
 
     @Override
     public void run() {
         while(LogWindow.finish){
-            for(int i = 1; i<=TransactionVerifier.state300.listSize(); i++){
+            for(int i = 1; i<=Payer.state301.listSize(); i++){
                     try {
-                        modelStatus300.addElement("|"+TransactionVerifier.state300.getStateAt(i).getTransaction().getCorrelative()+":"
-                                +TransactionVerifier.state300.getStateAt(i).getTransaction().getAmount()
+                        modelStatus301.addElement("|"+Payer.state301.getStateAt(i).getTransaction().getCorrelative()+ ":"
+                        +Payer.state301.getStateAt(i).getTransaction().getAmount()
                         +"|");
                     } catch (Exception ex) {
                         Logger.getLogger(UpdateStatus300.class.getName()).log(Level.SEVERE, null, ex);
                     }   
                 }
-                modelStatus300.clear();                      
+                modelStatus301.clear();                      
         }    
         if(!LogWindow.finish){
-            for(int i = 1; i<=TransactionVerifier.state300.listSize(); i++){
+            for(int i = 1; i<=Payer.state301.listSize(); i++){
                 try {
-                    modelStatus300.addElement("|"+TransactionVerifier.state300.getStateAt(i).getTransaction().getCorrelative()+":"
-                                +TransactionVerifier.state300.getStateAt(i).getTransaction().getAmount()
+                    modelStatus301.addElement("|"+Payer.state301.getStateAt(i).getTransaction().getCorrelative()+ ":"
+                        +Payer.state301.getStateAt(i).getTransaction().getAmount()
                         +"|");
                 } catch (Exception ex) {
                     Logger.getLogger(UpdateStatus300.class.getName()).log(Level.SEVERE, null, ex);

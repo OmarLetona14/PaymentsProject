@@ -20,6 +20,7 @@ public class StatusView extends javax.swing.JFrame {
     public static JList state201;
     public static JList state300;
     public static JList state400;
+    public static JList state301;
     /**
      * Creates new form StatusView
      */
@@ -30,6 +31,7 @@ public class StatusView extends javax.swing.JFrame {
         state201 = JLStatus201;
         state300 = JLStatus300;
         state400 = JLStatus400;
+        state301 = JLStatus301;
     }
 
     /**

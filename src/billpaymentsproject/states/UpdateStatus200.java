@@ -27,7 +27,11 @@ public class UpdateStatus200 implements Runnable {
         while(LogWindow.finish){
             for(int i = 1; i<=TransactionProcessor.state200.listSize(); i++){
                 try {
-                    modelStatus200.addElement(TransactionProcessor.state200.getStateAt(i).getTransaction().getCorrelative());
+                    if(TransactionProcessor.state200.getStateAt(i)!=null){
+                        modelStatus200.addElement("|"+TransactionProcessor.state200.getStateAt(i).getTransaction().getCorrelative()+":"
+                               + TransactionProcessor.state200.getStateAt(i).getTransaction().getAmount()
+                                +"|");
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(UpdateStatus200.class.getName()).log(Level.SEVERE, null, ex);
                 }  
@@ -37,7 +41,9 @@ public class UpdateStatus200 implements Runnable {
         if(!LogWindow.finish){
             for(int i = 1; i<=TransactionProcessor.state200.listSize(); i++){
                 try {
-                    modelStatus200.addElement(TransactionProcessor.state200.getStateAt(i).getTransaction().getCorrelative());
+                    modelStatus200.addElement("|"+TransactionProcessor.state200.getStateAt(i).getTransaction().getCorrelative()+":"
+                               + TransactionProcessor.state200.getStateAt(i).getTransaction().getAmount()
+                                +"|");
                 } catch (Exception ex) {
                     Logger.getLogger(UpdateStatus200.class.getName()).log(Level.SEVERE, null, ex);
                 }  

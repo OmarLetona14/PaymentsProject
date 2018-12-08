@@ -25,8 +25,9 @@ public class TransactionProcessor implements Runnable{
     
     public void process() throws Exception{
         int currentProcess = GenerateTransaction.state100.listSize();
-        line = log.getText()+"\n"+"Pasando transaccion "+ 
+        line = log.getText()+"\n"+"Pasando transaccion "+ "|"+
                 GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getCorrelative()+
+                    GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getAmount()+ "|"+
                 " de estado 100 ---> estado 200...";
         state200.addToFinal(GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction());
         GenerateTransaction.state100.delete(currentProcess-1);

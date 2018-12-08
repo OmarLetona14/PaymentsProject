@@ -28,6 +28,7 @@ public class GenerateTransaction implements Runnable {
     static UpdateStatus201 updateStatus201 = new UpdateStatus201(StatusView.state201);
     static UpdateStatus300 updateStatus300 = new UpdateStatus300(StatusView.state300);
     static UpdateStatus400 updateStatus400 = new UpdateStatus400(StatusView.state400);
+    static UpdateStatus301 updateStatus301 = new UpdateStatus301(StatusView.state301);
         
 
     public GenerateTransaction(JTextArea logTxt){
@@ -52,6 +53,7 @@ public class GenerateTransaction implements Runnable {
         new Thread(updateStatus201).start();
         new Thread(updateStatus300).start();
         new Thread(updateStatus400).start();
+        new Thread(updateStatus301).start();
         while(LogWindow.finish){
             generateNewTransaction();
             try {

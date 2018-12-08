@@ -17,6 +17,7 @@ public class Payer implements Runnable {
     public static StateList state301 = new StateList();
     JTextArea log;
     String line;
+    int count;
     
     public Payer(JTextArea log){
         this.log = log;
@@ -24,12 +25,27 @@ public class Payer implements Runnable {
     
     public void pay() throws Exception{
         int currentProcess = TransactionVerifier.state300.listSize();
-        line = log.getText()+"\n"+"Transaccion "+ 
+            if(count == 5){
+                line = log.getText()+"\n"+"Transaccion "+ "|"+
                    TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+
-               " pagada correctamente";
+                        TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getAmount() +
+                "|" +   " pagada correctamente";
+            state301.addToFinal(TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction());
+            count=0;
+            TransactionVerifier.state300.delete(currentProcess-1);
+           log.setText(line);
+            }else{
+                line = log.getText()+"\n"+"Ocurrió un error al intentar pagar la transaccion "+ "|" +
+                   TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
+                        TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getAmount()+
+               "|";
+                if(TransactionVerifier.state300.getStateAt(currentProcess-1)!=null){
+                    count++;
+                }
             state400.addToFinal(TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction());
             TransactionVerifier.state300.delete(currentProcess-1);
            log.setText(line);
+            }
     
     }
 
