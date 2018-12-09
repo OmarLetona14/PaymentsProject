@@ -58,7 +58,9 @@ public class LogWindow extends javax.swing.JFrame {
             }
         });
 
+        logTxt.setBackground(new java.awt.Color(0, 0, 0));
         logTxt.setColumns(20);
+        logTxt.setForeground(new java.awt.Color(255, 255, 255));
         logTxt.setRows(5);
         jScrollPane1.setViewportView(logTxt);
 
@@ -69,7 +71,7 @@ public class LogWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(initBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
                 .addComponent(finishBtn)
                 .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()

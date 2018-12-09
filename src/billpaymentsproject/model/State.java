@@ -6,8 +6,8 @@
 package billpaymentsproject.model;
 
 /**
- *
- * @author Omar
+ * Clase que define el modelo del estado en el que se está trabajando,
+ * contiene un transaccion y un id para identificarlo dentro de la cola.
  */
 public class State {
     

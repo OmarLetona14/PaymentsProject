@@ -6,6 +6,7 @@
 package billpaymentsproject.states;
 
 import billpaymentsproject.cola.StateList;
+import billpaymentsproject.helper.Clock;
 import billpaymentsproject.view.LogWindow;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ public class Payer implements Runnable {
     
     public static StateList state400 = new StateList();
     public static StateList state301 = new StateList();
+    Clock clock = new Clock();
     JTextArea log;
     String line;
     int count;
@@ -26,25 +28,31 @@ public class Payer implements Runnable {
     public void pay() throws Exception{
         int currentProcess = TransactionVerifier.state300.listSize();
             if(count == 5){
-                line = log.getText()+"\n"+"Transaccion "+ "|"+
-                   TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+
+                if(TransactionVerifier.state300.getStateAt(currentProcess-1)!=null){
+                    line = log.getText()+"\n"+"Transaccion "+ "|"+
+                   TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
                         TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getAmount() +
-                "|" +   " pagada correctamente";
-            state301.addToFinal(TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction());
-            count=0;
-            TransactionVerifier.state300.delete(currentProcess-1);
-           log.setText(line);
+                        "|" +   " pagada correctamente"+" "+clock.getCurrentTime();
+                    state301.addToFinal(TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction());
+                    count=0;
+                    TransactionVerifier.state300.delete(currentProcess-1);
+                   log.setText(line);
+                }
+                
             }else{
-                line = log.getText()+"\n"+"Ocurrió un error al intentar pagar la transaccion "+ "|" +
+                if(TransactionVerifier.state300.getStateAt(currentProcess-1)!=null){
+                    line = log.getText()+"\n"+"Ocurrió un error al intentar pagar la transaccion "+ "|" +
                    TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
                         TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getAmount()+
-               "|";
-                if(TransactionVerifier.state300.getStateAt(currentProcess-1)!=null){
-                    count++;
+                    "|"+" "+clock.getCurrentTime();
+                     if(TransactionVerifier.state300.getStateAt(currentProcess-1)!=null){
+                         count++;
+                     }
+                    state400.addToFinal(TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction());
+                    TransactionVerifier.state300.delete(currentProcess-1);
+                   log.setText(line);
                 }
-            state400.addToFinal(TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction());
-            TransactionVerifier.state300.delete(currentProcess-1);
-           log.setText(line);
+                
             }
     
     }

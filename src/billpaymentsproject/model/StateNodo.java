@@ -6,8 +6,7 @@
 package billpaymentsproject.model;
 
 /**
- *
- * @author Omar
+ * Nodo utilizado para guardar datos dentro de la cola.
  */
 public class StateNodo {
     

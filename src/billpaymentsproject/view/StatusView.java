@@ -63,7 +63,9 @@ public class StatusView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
 
+        JLState100.setBackground(new java.awt.Color(51, 255, 51));
         JLState100.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { };
             public int getSize() { return strings.length; }
@@ -73,6 +75,7 @@ public class StatusView extends javax.swing.JFrame {
 
         jLabel1.setText("Estado 100");
 
+        JLStatus200.setBackground(new java.awt.Color(51, 255, 51));
         JLStatus200.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {  };
             public int getSize() { return strings.length; }
@@ -82,6 +85,7 @@ public class StatusView extends javax.swing.JFrame {
 
         jLabel2.setText("Estado 200");
 
+        JLStatus201.setBackground(new java.awt.Color(255, 51, 51));
         JLStatus201.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { };
             public int getSize() { return strings.length; }
@@ -91,6 +95,7 @@ public class StatusView extends javax.swing.JFrame {
 
         jLabel3.setText("Estado 201");
 
+        JLStatus300.setBackground(new java.awt.Color(51, 255, 51));
         JLStatus300.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {  };
             public int getSize() { return strings.length; }
@@ -100,6 +105,7 @@ public class StatusView extends javax.swing.JFrame {
 
         jLabel4.setText("Estado 300");
 
+        JLStatus301.setBackground(new java.awt.Color(255, 51, 51));
         JLStatus301.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {  };
             public int getSize() { return strings.length; }
@@ -109,6 +115,7 @@ public class StatusView extends javax.swing.JFrame {
 
         jLabel5.setText("Estado 301");
 
+        JLStatus400.setBackground(new java.awt.Color(51, 255, 51));
         JLStatus400.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { };
             public int getSize() { return strings.length; }

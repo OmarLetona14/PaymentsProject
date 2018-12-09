@@ -6,6 +6,7 @@
 package billpaymentsproject.states;
 
 import billpaymentsproject.cola.StateList;
+import billpaymentsproject.helper.Clock;
 import billpaymentsproject.view.LogWindow;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ public class TransactionVerifier implements Runnable {
     
     private final JTextArea log;
     public static StateList state300 = new StateList();
+    Clock clock = new Clock();
     String line;
     
     public TransactionVerifier(JTextArea log){
@@ -22,21 +24,24 @@ public class TransactionVerifier implements Runnable {
     }
     public void verify() throws Exception{
         int currentProcess = TransactionProcessor.state200.listSize();
-        if(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount()>=0){
+        if(TransactionProcessor.state200.getStateAt(currentProcess-1)!=null){
+            if(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount()>=0){
             line = log.getText()+"\n"+"Transaccion "+ 
-                   TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+
-               " verificada correctamente";
-            state300.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
-            TransactionProcessor.state200.delete(currentProcess-1);
-           log.setText(line);
-       }else {
-            line = log.getText()+"\n"+"Transaccion "+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+
-               " denegada, ocurrió un error; Estado 201";
-            TransactionProcessor.state201.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
-            TransactionProcessor.state200.delete(currentProcess-1);
-            log.setText(line);
-       }
-    
+                  "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+":"
+                    + TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount() + "|"
+               +" verificada correctamente"+" "+clock.getCurrentTime();
+                state300.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
+                TransactionProcessor.state200.delete(currentProcess-1);
+               log.setText(line);
+            }else {
+                line = log.getText()+"\n"+"Transaccion "+ "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"
+                        +TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount() + "|"
+                   +" denegada, ocurrió un error; Estado 201"+" "+clock.getCurrentTime();
+                TransactionProcessor.state201.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
+                TransactionProcessor.state200.delete(currentProcess-1);
+                log.setText(line);
+           }
+        }
     }
     @Override
     public void run() {

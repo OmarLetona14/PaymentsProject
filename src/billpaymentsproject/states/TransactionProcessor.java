@@ -6,6 +6,7 @@
 package billpaymentsproject.states;
 
 import billpaymentsproject.cola.StateList;
+import billpaymentsproject.helper.Clock;
 import billpaymentsproject.view.LogWindow;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,22 +17,27 @@ public class TransactionProcessor implements Runnable{
     private final JTextArea log;
     public static StateList state200 = new StateList();
     public static StateList state201 = new StateList();
-    
+    Clock clock = new Clock();
     String line;
     
+    //Se recibe el JTextArea de la ventana LogWindow
     public TransactionProcessor(JTextArea log){
         this.log = log;
     }
     
+    //Ejecuta un proceso en donde se toma la ultima transaccion de la cola
+    //y se pasa del estado 100 al estado 200
     public void process() throws Exception{
         int currentProcess = GenerateTransaction.state100.listSize();
-        line = log.getText()+"\n"+"Pasando transaccion "+ "|"+
-                GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getCorrelative()+
+        if(GenerateTransaction.state100.getStateAt(currentProcess-1)!=null){
+            line = log.getText()+"\n"+"Pasando transaccion "+ "|"+
+                GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
                     GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getAmount()+ "|"+
-                " de estado 100 ---> estado 200...";
+                " de estado 100 ---> estado 200..."+" "+clock.getCurrentTime();
         state200.addToFinal(GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction());
         GenerateTransaction.state100.delete(currentProcess-1);
-       log.setText(line); 
+        log.setText(line); 
+        } 
     }
 
     @Override

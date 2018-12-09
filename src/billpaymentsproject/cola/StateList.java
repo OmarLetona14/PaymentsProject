@@ -1,13 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Clase que define el comportamiento de la cola de datos que se genera
+    al procesar transacciones. Es una estructura de datos.
  */
 package billpaymentsproject.cola;
 
 import billpaymentsproject.model.State;
 import billpaymentsproject.model.StateNodo;
 import billpaymentsproject.model.Transaction;
+
+
 
 
 public class StateList {
@@ -50,7 +51,7 @@ public class StateList {
                 for(int i=1; i<idRef; i++){
                     aux = aux.sig;
                 }
-                if(aux.info!=null){
+                if(aux!=null){
                     return aux.info;
                 } 
             }
@@ -81,26 +82,10 @@ public class StateList {
                     aux = aux.sig;
                 }
                 StateNodo next = aux.sig.sig;
-               
                 aux.sig = next;
             }
             size--;
         }
     }
-    
-    public void print(){
-        StateNodo temp = first;
-        while(temp != null){
-
-            System.out.println("Actual: "+temp.info.getId());
-            if(temp.sig != null){
-                System.out.println("Siguiente: "+temp.sig.info.getId());
-            }
-            System.out.println("-----------------------------");
-            
-            temp = temp.sig;
-        }
-    }
-    
     
 }

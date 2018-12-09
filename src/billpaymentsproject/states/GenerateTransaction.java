@@ -6,6 +6,7 @@
 package billpaymentsproject.states;
 
 import billpaymentsproject.cola.StateList;
+import billpaymentsproject.helper.Clock;
 import billpaymentsproject.helper.RandomNumber;
 import billpaymentsproject.model.Transaction;
 import billpaymentsproject.view.LogWindow;
@@ -21,6 +22,7 @@ public class GenerateTransaction implements Runnable {
     static StateList state100 = new StateList();
     RandomNumber random = new RandomNumber();
     TransactionProcessor transactionProcessor=null;
+    Clock clock = new Clock();
     public static int size = 1;
     static StatusView statusView = new StatusView();
     static UpdateStatus100 updateStatus100 = new UpdateStatus100(StatusView.state100);
@@ -40,7 +42,7 @@ public class GenerateTransaction implements Runnable {
         state100.addToFinal(transaction);
         String line = log.getText()+"\n"+ "Transaccion --->  " + 
                 transaction.getCorrelative()+":"+transaction.getAmount()+ 
-                " estado ---> 100";
+                " estado ---> 100"+" "+clock.getCurrentTime();
         log.setText(line);
         size++;        
     }
@@ -57,7 +59,7 @@ public class GenerateTransaction implements Runnable {
         while(LogWindow.finish){
             generateNewTransaction();
             try {
-                Thread.sleep(1000); 
+                Thread.sleep(random.generateRandomTime()); 
             } catch (InterruptedException ex) {
                 Logger.getLogger(GenerateTransaction.class.getName()).log(Level.SEVERE, null, ex);
             }

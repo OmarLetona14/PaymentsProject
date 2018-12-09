@@ -6,8 +6,7 @@
 package billpaymentsproject.model;
 
 /**
- *
- * @author Omar
+ *Modelo que define la transacción que se está procesando. 
  */
 public class Transaction {
     
