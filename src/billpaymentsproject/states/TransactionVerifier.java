@@ -32,6 +32,7 @@ public class TransactionVerifier implements Runnable {
                +" verificada correctamente"+" at "+clock.getTime();
                 state300.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
                 TransactionProcessor.state200.delete(currentProcess-1);
+                GenerateTransaction.LOGGER.log(Level.INFO, line);
                log.setText(line);
             }else {
                 line = log.getText()+"\n"+"Transaccion "+ "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"
@@ -39,6 +40,7 @@ public class TransactionVerifier implements Runnable {
                    +" denegada, ocurrió un error; Estado 201"+" at "+clock.getTime();
                 TransactionProcessor.state201.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
                 TransactionProcessor.state200.delete(currentProcess-1);
+                GenerateTransaction.LOGGER.log(Level.INFO, line);
                 log.setText(line);
            }
         }

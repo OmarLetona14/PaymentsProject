@@ -5,14 +5,19 @@
  */
 package billpaymentsproject.states;
 
+import billpaymentsproject.Log.LogEvent;
 import billpaymentsproject.cola.StateList;
 import billpaymentsproject.helper.Clock;
 import billpaymentsproject.helper.RandomNumber;
 import billpaymentsproject.model.Transaction;
 import billpaymentsproject.view.LogWindow;
 import billpaymentsproject.view.StatusView;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JTextArea;
 
 public class GenerateTransaction implements Runnable {
@@ -23,6 +28,9 @@ public class GenerateTransaction implements Runnable {
     RandomNumber random = new RandomNumber();
     TransactionProcessor transactionProcessor=null;
     Clock clock = new Clock();
+    Handler fileHandler;
+    public final static Logger LOGGER = Logger.getLogger("billpaymentsproject.Log.LogEvent");
+    SimpleFormatter simpleFormatter;
     public static int size = 1;
     static StatusView statusView = new StatusView();
     static UpdateStatus100 updateStatus100 = new UpdateStatus100(StatusView.state100);
@@ -32,17 +40,30 @@ public class GenerateTransaction implements Runnable {
     static UpdateStatus400 updateStatus400 = new UpdateStatus400(StatusView.state400);
     static UpdateStatus301 updateStatus301 = new UpdateStatus301(StatusView.state301);
         
-
+    public void init(){
+        try {
+            this.fileHandler = new FileHandler("C:\\Users\\Omar\\Desktop\\BillPaymentsProject\\src\\Log\\Archivo del log",false);
+        } catch (IOException ex) {
+            Logger.getLogger(GenerateTransaction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(GenerateTransaction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        simpleFormatter = new SimpleFormatter();
+    }
     public GenerateTransaction(JTextArea logTxt){
+        init();
         log = logTxt;
+        fileHandler.setFormatter(simpleFormatter);
+        LOGGER.addHandler(fileHandler);
     }
     
     public void generateNewTransaction(){
         transaction = new Transaction(size,random.generateCorrelative(),"","",random.generateRandomAmount());
         state100.addToFinal(transaction);
-        String line = log.getText()+"\n"+ "Transaccion --->  " + 
+        String line = log.getText()+"\n"+ "Generando transaccion " + 
                 transaction.getCorrelative()+":"+transaction.getAmount()+ 
-                " estado ---> 100"+" at "+clock.getTime();
+                "  Estado:100"+" at "+clock.getTime();
+        LOGGER.log(Level.INFO, line);
         log.setText(line);
         size++;        
     }
@@ -56,6 +77,7 @@ public class GenerateTransaction implements Runnable {
         new Thread(updateStatus300).start();
         new Thread(updateStatus400).start();
         new Thread(updateStatus301).start();
+        
         while(LogWindow.finish){
             generateNewTransaction();
             try {
