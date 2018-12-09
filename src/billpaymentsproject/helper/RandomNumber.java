@@ -7,7 +7,7 @@ public class RandomNumber {
     //Método para generar un numero aleatorio comprendido entre 1000 y 9000, este
     //será el tiempo en el que se generará una nueva transacción (En milisegundos)
     public int generateRandomTime(){
-        int valorEntero = (int) (Math.random()*1000);
+        int valorEntero = (int) (Math.floor(Math.random()*(6-3+1)+3)*1000);
         return valorEntero;         
     }
     

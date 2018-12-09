@@ -42,7 +42,7 @@ public class GenerateTransaction implements Runnable {
         state100.addToFinal(transaction);
         String line = log.getText()+"\n"+ "Transaccion --->  " + 
                 transaction.getCorrelative()+":"+transaction.getAmount()+ 
-                " estado ---> 100"+" "+clock.getCurrentTime();
+                " estado ---> 100"+" at "+clock.getTime();
         log.setText(line);
         size++;        
     }
@@ -59,7 +59,7 @@ public class GenerateTransaction implements Runnable {
         while(LogWindow.finish){
             generateNewTransaction();
             try {
-                Thread.sleep(random.generateRandomTime()); 
+                Thread.sleep(1000); 
             } catch (InterruptedException ex) {
                 Logger.getLogger(GenerateTransaction.class.getName()).log(Level.SEVERE, null, ex);
             }

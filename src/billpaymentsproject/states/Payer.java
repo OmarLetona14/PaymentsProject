@@ -32,7 +32,7 @@ public class Payer implements Runnable {
                     line = log.getText()+"\n"+"Transaccion "+ "|"+
                    TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
                         TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getAmount() +
-                        "|" +   " pagada correctamente"+" "+clock.getCurrentTime();
+                        "|" +   " pagada correctamente"+" at "+clock.getTime();
                     state301.addToFinal(TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction());
                     count=0;
                     TransactionVerifier.state300.delete(currentProcess-1);
@@ -44,7 +44,7 @@ public class Payer implements Runnable {
                     line = log.getText()+"\n"+"Ocurrió un error al intentar pagar la transaccion "+ "|" +
                    TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
                         TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getAmount()+
-                    "|"+" "+clock.getCurrentTime();
+                    "|"+" at "+clock.getTime();
                      if(TransactionVerifier.state300.getStateAt(currentProcess-1)!=null){
                          count++;
                      }

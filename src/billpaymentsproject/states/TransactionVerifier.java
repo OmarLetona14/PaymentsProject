@@ -29,14 +29,14 @@ public class TransactionVerifier implements Runnable {
             line = log.getText()+"\n"+"Transaccion "+ 
                   "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+":"
                     + TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount() + "|"
-               +" verificada correctamente"+" "+clock.getCurrentTime();
+               +" verificada correctamente"+" at "+clock.getTime();
                 state300.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
                 TransactionProcessor.state200.delete(currentProcess-1);
                log.setText(line);
             }else {
                 line = log.getText()+"\n"+"Transaccion "+ "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"
                         +TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount() + "|"
-                   +" denegada, ocurrió un error; Estado 201"+" "+clock.getCurrentTime();
+                   +" denegada, ocurrió un error; Estado 201"+" at "+clock.getTime();
                 TransactionProcessor.state201.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
                 TransactionProcessor.state200.delete(currentProcess-1);
                 log.setText(line);

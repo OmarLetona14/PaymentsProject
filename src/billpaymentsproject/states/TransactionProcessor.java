@@ -33,7 +33,7 @@ public class TransactionProcessor implements Runnable{
             line = log.getText()+"\n"+"Pasando transaccion "+ "|"+
                 GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
                     GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getAmount()+ "|"+
-                " de estado 100 ---> estado 200..."+" "+clock.getCurrentTime();
+                " de estado 100 ---> estado 200..."+" at "+clock.getTime();
         state200.addToFinal(GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction());
         GenerateTransaction.state100.delete(currentProcess-1);
         log.setText(line); 
