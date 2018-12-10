@@ -9,10 +9,6 @@ import billpaymentsproject.states.UpdateStatus100;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-/**
- *
- * @author Omar
- */
 public class StatusView extends javax.swing.JFrame {
     
     public static JList state100;
@@ -32,6 +28,7 @@ public class StatusView extends javax.swing.JFrame {
         state300 = JLStatus300;
         state400 = JLStatus400;
         state301 = JLStatus301;
+        this.setResizable(false);
     }
 
     /**

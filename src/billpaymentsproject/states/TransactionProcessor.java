@@ -19,7 +19,7 @@ public class TransactionProcessor implements Runnable{
     public static StateList state201 = new StateList();
     
     Clock clock = new Clock();
-    String line;
+    String line, logMessage;
     
     //Se recibe el JTextArea de la ventana LogWindow
     public TransactionProcessor(JTextArea log){
@@ -31,13 +31,14 @@ public class TransactionProcessor implements Runnable{
     public void process() throws Exception{
         int currentProcess = GenerateTransaction.state100.listSize();
         if(GenerateTransaction.state100.getStateAt(currentProcess-1)!=null){
-            line = log.getText()+"\n"+"Pasando transaccion "+ "|"+
+            logMessage = "Pasando transaccion "+ "|"+
                 GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
                     GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction().getAmount()+ "|"+
-                " de Estado:100 ---> Estado:200..."+" at "+clock.getTime();
+                " de Estado:100 ---> Estado:200...";
+            line = log.getText()+"\n"+logMessage+" at "+clock.getTime();
         state200.addToFinal(GenerateTransaction.state100.getStateAt(currentProcess-1).getTransaction());
         GenerateTransaction.state100.delete(currentProcess-1);
-        GenerateTransaction.LOGGER.log(Level.INFO, line);
+        GenerateTransaction.LOGGER.log(Level.INFO, logMessage);
         log.setText(line); 
         } 
     }

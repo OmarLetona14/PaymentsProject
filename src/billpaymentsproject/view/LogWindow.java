@@ -10,10 +10,6 @@ import billpaymentsproject.states.TransactionVerifier;
 import billpaymentsproject.states.GenerateTransaction;
 import billpaymentsproject.states.Payer;
 
-/**
- *
- * @author Omar
- */
 public class LogWindow extends javax.swing.JFrame {
 
     GenerateTransaction generate = null;

@@ -33,6 +33,7 @@ public class GenerateTransaction implements Runnable {
     SimpleFormatter simpleFormatter;
     public static int size = 1;
     static StatusView statusView = new StatusView();
+    String line, logMessage;
     static UpdateStatus100 updateStatus100 = new UpdateStatus100(StatusView.state100);
     static UpdateStatus200 updateStatus200 = new UpdateStatus200(StatusView.state200);
     static UpdateStatus201 updateStatus201 = new UpdateStatus201(StatusView.state201);
@@ -42,7 +43,8 @@ public class GenerateTransaction implements Runnable {
         
     public void init(){
         try {
-            this.fileHandler = new FileHandler("C:\\Users\\Omar\\Desktop\\BillPaymentsProject\\src\\Log\\Archivo del log",false);
+            this.fileHandler = new FileHandler("C:\\Users\\Omar\\Desktop\\BillPaymentsProject\\src\\Log\\Archivo del log.log"
+                    + "",false);
         } catch (IOException ex) {
             Logger.getLogger(GenerateTransaction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SecurityException ex) {
@@ -60,10 +62,11 @@ public class GenerateTransaction implements Runnable {
     public void generateNewTransaction(){
         transaction = new Transaction(size,random.generateCorrelative(),"","",random.generateRandomAmount());
         state100.addToFinal(transaction);
-        String line = log.getText()+"\n"+ "Generando transaccion " + 
+        logMessage = "Generando transaccion " + 
                 transaction.getCorrelative()+":"+transaction.getAmount()+ 
-                "  Estado:100"+" at "+clock.getTime();
-        LOGGER.log(Level.INFO, line);
+                "  Estado:100";
+        line = log.getText()+"\n"+ logMessage+" at "+clock.getTime();
+        LOGGER.log(Level.INFO, logMessage);
         log.setText(line);
         size++;        
     }

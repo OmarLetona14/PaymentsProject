@@ -17,7 +17,7 @@ public class TransactionVerifier implements Runnable {
     private final JTextArea log;
     public static StateList state300 = new StateList();
     Clock clock = new Clock();
-    String line;
+    String line, logMessage;
     
     public TransactionVerifier(JTextArea log){
         this.log = log;
@@ -26,21 +26,23 @@ public class TransactionVerifier implements Runnable {
         int currentProcess = TransactionProcessor.state200.listSize();
         if(TransactionProcessor.state200.getStateAt(currentProcess-1)!=null){
             if(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount()>=0){
-            line = log.getText()+"\n"+"Transaccion "+ 
+                logMessage = "Transaccion "+ 
                   "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+":"
                     + TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount() + "|"
-               +" verificada correctamente"+" at "+clock.getTime();
+               +" verificada correctamente";
+            line = log.getText()+"\n"+logMessage+" at "+clock.getTime();
                 state300.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
                 TransactionProcessor.state200.delete(currentProcess-1);
-                GenerateTransaction.LOGGER.log(Level.INFO, line);
+                GenerateTransaction.LOGGER.log(Level.INFO, logMessage);
                log.setText(line);
             }else {
-                line = log.getText()+"\n"+"Transaccion "+ "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"
+                logMessage = "Transaccion "+ "|"+ TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"
                         +TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction().getAmount() + "|"
-                   +" denegada, ocurrió un error; Estado 201"+" at "+clock.getTime();
+                   +" denegada, ocurrió un error; Estado 201";
+                line = log.getText()+"\n"+logMessage+" at "+clock.getTime();
                 TransactionProcessor.state201.addToFinal(TransactionProcessor.state200.getStateAt(currentProcess-1).getTransaction());
                 TransactionProcessor.state200.delete(currentProcess-1);
-                GenerateTransaction.LOGGER.log(Level.INFO, line);
+                GenerateTransaction.LOGGER.log(Level.WARNING, logMessage);
                 log.setText(line);
            }
         }
