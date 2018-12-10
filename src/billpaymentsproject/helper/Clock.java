@@ -27,6 +27,5 @@ public class Clock {
         Date time = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(time);
-    }
-    
+    } 
 }

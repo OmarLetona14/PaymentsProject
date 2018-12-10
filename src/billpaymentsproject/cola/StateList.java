@@ -8,9 +8,6 @@ import billpaymentsproject.model.State;
 import billpaymentsproject.model.StateNodo;
 import billpaymentsproject.model.Transaction;
 
-
-
-
 public class StateList {
     private StateNodo first;
     int size=1;

@@ -9,6 +9,7 @@ import billpaymentsproject.states.TransactionProcessor;
 import billpaymentsproject.states.TransactionVerifier;
 import billpaymentsproject.states.GenerateTransaction;
 import billpaymentsproject.states.Payer;
+import java.io.File;
 
 public class LogWindow extends javax.swing.JFrame {
 
@@ -16,6 +17,7 @@ public class LogWindow extends javax.swing.JFrame {
     public static boolean finish = true;
     TransactionProcessor transactionProcessor=null;
     TransactionVerifier transactionVerifier =null;
+    File logFile = new File("C:\\Users\\Omar\\Desktop\\BillPaymentsProject\\src\\Log\\Archivo del log.log");
     Payer payer = null;
     
     public LogWindow() {
@@ -91,6 +93,9 @@ public class LogWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initBtnActionPerformed
+        if(logFile.exists()){
+            logFile.delete();
+        }
         initBtn.setEnabled(false);
         finishBtn.setEnabled(true);
         if(logTxt.getText().equals("")){
@@ -110,6 +115,7 @@ public class LogWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_initBtnActionPerformed
 
     private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
+        
         finishBtn.setEnabled(false);
         initBtn.setEnabled(true);
         finish = false;

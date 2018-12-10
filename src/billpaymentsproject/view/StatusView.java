@@ -5,8 +5,6 @@
  */
 package billpaymentsproject.view;
 
-import billpaymentsproject.states.UpdateStatus100;
-import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 public class StatusView extends javax.swing.JFrame {
@@ -25,7 +23,7 @@ public class StatusView extends javax.swing.JFrame {
         state100 = JLState100;
         state200 = JLStatus200;
         state201 = JLStatus201;
-        state300 = JLStatus300;
+        state300 = JLStatus300; 
         state400 = JLStatus400;
         state301 = JLStatus301;
         this.setResizable(false);

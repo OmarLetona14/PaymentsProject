@@ -80,7 +80,6 @@ public class GenerateTransaction implements Runnable {
         new Thread(updateStatus300).start();
         new Thread(updateStatus400).start();
         new Thread(updateStatus301).start();
-        
         while(LogWindow.finish){
             generateNewTransaction();
             try {

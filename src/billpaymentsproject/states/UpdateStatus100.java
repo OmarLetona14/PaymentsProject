@@ -44,7 +44,7 @@ public class UpdateStatus100 implements Runnable {
                             +GenerateTransaction.state100.getStateAt(i).getTransaction().getAmount()
                     +"|");
                 } catch (Exception ex) {
-                    Logger.getLogger(UpdateStatus100.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(UpdateStatus100.class.getName()).log(Level.INFO, null, ex);
                 }     
             }
         }
