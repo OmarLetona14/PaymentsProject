@@ -12,6 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
+/*En esta clase se pagan todas las transacciones, se agregan a la cola del estado 400
+Por cada 5 transacciones pagadas correctamente
+una simula un error y se agrega a la cola del estado 301*/
+
 public class Payer implements Runnable {
     
     public static StateList state400 = new StateList();
@@ -27,7 +31,7 @@ public class Payer implements Runnable {
     
     public void pay() throws Exception{
         int currentProcess = TransactionVerifier.state300.listSize();
-            if(count == 5){
+        if(count == 5){
                 if(TransactionVerifier.state300.getStateAt(currentProcess-1)!=null){
                     logMessagge = "Ocurrió un error al intentar pagar la transaccion "+ "|" +
                    TransactionVerifier.state300.getStateAt(currentProcess-1).getTransaction().getCorrelative()+ ":"+
@@ -57,8 +61,7 @@ public class Payer implements Runnable {
                    log.setText(line);
                 }
                 
-            }
-    
+            }    
     }
 
     @Override

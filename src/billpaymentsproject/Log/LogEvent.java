@@ -8,6 +8,7 @@ package billpaymentsproject.Log;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/*En esta clase se generan todos los logs que se introducen al archivo de logs*/
 
 public class LogEvent {
     

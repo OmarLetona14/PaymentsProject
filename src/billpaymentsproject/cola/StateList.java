@@ -1,13 +1,11 @@
-/*
-    Clase que define el comportamiento de la cola de datos que se genera
-    al procesar transacciones. Es una estructura de datos.
- */
 package billpaymentsproject.cola;
 
 import billpaymentsproject.model.State;
 import billpaymentsproject.model.StateNodo;
 import billpaymentsproject.model.Transaction;
-
+/*Esta clase modela la cola que se genera al cambiar de estado,
+cada estado se representa como una cola que tiene transacciones pendientes a procesar
+Es una estructura de datos.*/
 public class StateList {
     private StateNodo first;
     int size=1;

@@ -5,7 +5,6 @@
  */
 package billpaymentsproject.states;
 
-import billpaymentsproject.Log.LogEvent;
 import billpaymentsproject.cola.StateList;
 import billpaymentsproject.helper.Clock;
 import billpaymentsproject.helper.RandomNumber;
